@@ -293,6 +293,7 @@ def download_data(source: str,
     
     return image_path
 
+import zipfile
 def unzip_data(filename):
   """
   Unzips filename into the current working directory.
