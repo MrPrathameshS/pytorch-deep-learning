@@ -305,4 +305,28 @@ def unzip_data(filename):
   zip_ref.extractall()
   zip_ref.close()
 
+def precision_fn(y_true, y_pred):
+    """Calculates precision using torch."""
+    true_positives = ((y_pred == 1) & (y_true == 1)).sum().item()
+    predicted_positives = (y_pred == 1).sum().item()
+    precision = true_positives / (predicted_positives + 1e-8)
+    return precision * 100
+
+
+def recall_fn(y_true, y_pred):
+    """Calculates recall using torch."""
+    true_positives = ((y_pred == 1) & (y_true == 1)).sum().item()
+    actual_positives = (y_true == 1).sum().item()
+    recall = true_positives / (actual_positives + 1e-8)
+    return recall * 100
+
+
+def f1_fn(y_true, y_pred):
+    """Calculates F1-score using torch."""
+    precision = precision_fn(y_true, y_pred) / 100
+    recall = recall_fn(y_true, y_pred) / 100
+    f1 = 2 * (precision * recall) / (precision + recall + 1e-8)
+    return f1 * 100
+
+
 
