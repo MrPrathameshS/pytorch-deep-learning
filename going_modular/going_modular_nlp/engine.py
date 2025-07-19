@@ -54,7 +54,7 @@ def train_step(model: torch.nn.Module,
         y_pred = model(input_ids).squeeze()
 
         # 2. Calculate  and accumulate loss
-        loss = loss_fn(y_pred, y)
+        loss = loss_fn(y_pred, labels)
         train_loss += loss.item()
 
         # 3. Optimizer zero grad
@@ -115,7 +115,7 @@ def test_step(model: torch.nn.Module,
 
             test_pred_logits = model(input_ids).squeeze()
             # 2. Calculate and accumulate loss
-            loss = loss_fn(test_pred_logits, y)
+            loss = loss_fn(test_pred_logits, labels)
             test_loss += loss.item()
 
             # Calculate and accumulate accuracy
